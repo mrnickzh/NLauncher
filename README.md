@@ -1,6 +1,4 @@
 # NLauncher
-# Настраиваемый майнкрафт-лаунчер для вашего модифицированного проекта
+# Customizeable minecraft launcher for your modded server
 
-**Если у вас есть вопросы или проблемы - _https://discord.gg/baMkECEMew_**
-
-Скоро тут будет опубликован мануал по настройке лаунчера...
+Going to publish a manual for setting launcher up here soon...
