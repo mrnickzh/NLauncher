@@ -1,6 +1,7 @@
 # NLauncher
 # Customizeable minecraft launcher for your modded server
 
-**Dependencies:** nlohmann/json, Qt6
+**Launcher dependencies:** nlohmann/json, Qt6
+**LaunchServer dependencies:** Flask
 
 Going to publish a manual for setting launcher up here soon...
