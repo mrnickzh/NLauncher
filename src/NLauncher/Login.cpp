@@ -4,6 +4,7 @@ Login::Login(QApplication* a, QMainWindow* w) {
 	nickname = "";
 	password = "";
 	answer = "";
+	IP = "192.168.3.107:5000";
 	manager = new QNetworkAccessManager(a);
 	nick_l = new QLabel("Nickname", w);
 	pass_l = new QLabel("Password", w);
@@ -21,7 +22,7 @@ void Login::setPassword(const QString& val) {
 };
 
 void Login::loginRequest() {
-	std::string strurl = "http://192.168.100.117:5000/login/nickname=" + nickname + "&password=" + password;
+	std::string strurl = "http://" + IP + "/login/nickname=" + nickname + "&password=" + password;
 	QString url = QString::fromUtf8(strurl.c_str());
 	connect(manager, &QNetworkAccessManager::finished, this, &Login::replyFinished);
 	manager->get(QNetworkRequest(QUrl(url)));

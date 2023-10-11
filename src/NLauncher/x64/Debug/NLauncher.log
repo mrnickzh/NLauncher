@@ -1,2 +1,8 @@
-﻿  Login.cpp
+﻿  moc Login.h
+  moc MainGUI.h
+  Login.cpp
+  MainGUI.cpp
+  main.cpp
+  moc_Login.cpp
+  moc_MainGUI.cpp
   NLauncher.vcxproj -> D:\c++Project\NLauncher\x64\Debug\NLauncher.exe

@@ -31,6 +31,7 @@ public:
 	std::string password;
 	std::string uuid;
 	std::string access_token;
+	std::string IP;
 	QLabel* nick_l;
 	QLabel* pass_l;
 	QLineEdit* nick_e;

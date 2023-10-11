@@ -4,6 +4,7 @@ MainGUI::MainGUI(QApplication* a, QMainWindow* w, Login* lc) {
 	lclass = lc;
 	utils = new Utils;
 	launcher_name = "NLauncher";
+	IP = "192.168.3.107:5000";
 	std::string homefolder = getenv("USERPROFILE");
 	launcher_path = homefolder + "\\AppData\\Roaming\\" + launcher_name;
 	if (!fs::is_directory(launcher_path) || !fs::exists(launcher_path)) {
@@ -187,7 +188,7 @@ void MainGUI::debugMode() {
 };
 
 void MainGUI::changeServer() {
-	std::string strurl = "http://192.168.100.117:5000/server/id=" + std::to_string(server_id);
+	std::string strurl = "http://" + IP + "/server/id=" + std::to_string(server_id);
 	QString url = QString::fromUtf8(strurl.c_str());
 	connect(request_manager, &QNetworkAccessManager::finished, this, &MainGUI::changeServerFinished);
 	request_manager->get(QNetworkRequest(QUrl(url)));
@@ -221,7 +222,7 @@ void MainGUI::changeServerFinished(QNetworkReply* reply) {
 	description_l->setAlignment(Qt::AlignCenter);
 	description_l->show();
 	description_l->raise();
-	QString img_link = QString::fromUtf8("http://192.168.100.117:5000/file/path=sprevs&" + server_image);
+	QString img_link = QString::fromUtf8("http://" + IP + "/file/path=sprevs&" + server_image);
 	dl->setTarget(img_link, QString::fromUtf8(std::string(launcher_path+"\\sprev.jpg")));
 	dl->download();
 	connect(dl, SIGNAL(done()), this, SLOT(drawImage()));
@@ -290,7 +291,7 @@ void MainGUI::downloadGameFiles(QNetworkReply* reply) {
 				cpath += "\\" + folders[j];
 			}
 			std::cout << "downloading " + name << std::endl;
-			QString file_link = QString::fromUtf8("http://192.168.100.117:5000/file/path=" + link + "&" + name);
+			QString file_link = QString::fromUtf8("http://" + IP + "/file/path=" + link + "&" + name);
 			dl->setTarget(file_link, QString::fromUtf8(std::string(launcher_path + "\\" + path + "\\" + name)));
 			total_files += 1;
 		}
@@ -302,7 +303,7 @@ void MainGUI::downloadGameFiles(QNetworkReply* reply) {
 			hashfile.close();
 			if (md5(buffer.str()) != hash && !std::any_of(file_whitelist.begin(), file_whitelist.end(), [&fpath](const auto& s) { return fpath.find(s) != std::string::npos; })) {
 				std::cout << "downloading " + name << std::endl;
-				QString file_link = QString::fromUtf8("http://192.168.100.117:5000/file/path=" + link + "&" + name);
+				QString file_link = QString::fromUtf8("http://" + IP + "/file/path=" + link + "&" + name);
 				dl->setTarget(file_link, QString::fromUtf8(std::string(launcher_path + "\\" + path + "\\" + name)));
 				total_files += 1;
 			}
@@ -342,7 +343,7 @@ void MainGUI::clearDir() {
 };
 
 void MainGUI::requestFileWhitelist() {
-	std::string strurl = "http://192.168.100.117:5000/filewl/id=" + std::to_string(server_id);
+	std::string strurl = "http://" + IP + "/filewl/id=" + std::to_string(server_id);
 	QString url = QString::fromUtf8(strurl.c_str());
 	connect(request_manager, &QNetworkAccessManager::finished, this, &MainGUI::getFileWhitelist);
 	request_manager->get(QNetworkRequest(QUrl(url)));
@@ -393,7 +394,7 @@ void MainGUI::getAssetIndex(QNetworkReply* reply) {
 	json jsondata;
 	jsondata = json::parse(std::string(answer.data()));
 	asset_index = jsondata["assetIndex"]["id"];
-	std::string strurl = "http://192.168.100.117:5000/serverfiles/id=" + std::to_string(server_id);
+	std::string strurl = "http://" + IP + "/serverfiles/id=" + std::to_string(server_id);
 	QString url = QString::fromUtf8(strurl.c_str());
 	connect(request_manager, &QNetworkAccessManager::finished, this, &MainGUI::downloadGameFiles);
 	request_manager->get(QNetworkRequest(QUrl(url)));

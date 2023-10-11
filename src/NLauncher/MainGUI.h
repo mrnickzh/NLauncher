@@ -83,6 +83,7 @@ private:
 	std::vector<std::string> hash_list;
 	std::vector<std::string> file_whitelist;
 	std::string mlclass;
+	std::string IP;
 public:
 	QSlider* memory_s;
 	QRadioButton* debug_b;
