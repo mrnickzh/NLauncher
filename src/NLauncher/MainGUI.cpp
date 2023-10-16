@@ -4,7 +4,7 @@ MainGUI::MainGUI(QApplication* a, QMainWindow* w, Login* lc) {
 	lclass = lc;
 	utils = new Utils;
 	launcher_name = "NLauncher";
-	IP = "192.168.3.107:5000";
+	IP = "192.168.100.117:5000";
 	std::string homefolder = getenv("USERPROFILE");
 	launcher_path = homefolder + "\\AppData\\Roaming\\" + launcher_name;
 	if (!fs::is_directory(launcher_path) || !fs::exists(launcher_path)) {
@@ -414,7 +414,7 @@ void MainGUI::gameDownloadFinished() {
 			java_path = launcher_path + "\\" + server_path + "\\java\\bin\\java.exe";
 		else
 			java_path = launcher_path + "\\" + server_path + "\\java\\bin\\javaw.exe";
-		std::string launch_command = "-Dos.name=Windows10 -Dos.version=10.0 -Djava.library.path=" + launcher_path + "\\" + server_path + "\\versions\\" + server_version + "\\natives -cp " + libraries + " -Xmx" + std::to_string(memory) + "M -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=32M -Dfml.ignoreInvalidMinecraftCertificates=true -Dfml.ignorePatchDiscrepancies=true -Djava.net.preferIPv4Stack=true -Dminecraft.applet.TargetDirectory=" + launcher_path + "\\" + server_path + " -Dlog4j.configurationFile=" + launcher_path + "\\" + server_path + "\\assets\\log_configs\\client-" + server_version + ".xml net.minecraft.launchwrapper.Launch --username " + lclass->nickname + " --version " + server_version + " --gameDir " + launcher_path + "\\" + server_path + " --assetsDir " + launcher_path + "\\" + server_path + "\\assets --assetIndex " + asset_index + " --uuid " + lclass->uuid + " --accessToken " + lclass->access_token + " --userType mojang --tweakClass " + mlclass + " --width 925 --height 530";
+		std::string launch_command = "-Dos.name=Windows10 -Dos.version=10.0 -Djava.library.path=" + launcher_path + "\\" + server_path + "\\versions\\" + server_version + "\\natives -cp " + libraries + " -Xmx" + std::to_string(memory) + "M -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=32M -Dfml.ignoreInvalidMinecraftCertificates=true -Dfml.ignorePatchDiscrepancies=true -Djava.net.preferIPv4Stack=true -Dminecraft.applet.TargetDirectory=" + launcher_path + "\\" + server_path + " net.minecraft.launchwrapper.Launch --username " + lclass->nickname + " --version " + server_version + " --gameDir " + launcher_path + "\\" + server_path + " --assetsDir " + launcher_path + "\\" + server_path + "\\assets --assetIndex " + asset_index + " --uuid " + lclass->uuid + " --accessToken " + lclass->access_token + " --userType mojang --tweakClass " + mlclass + " --width 925 --height 530";
 		std::cout << "Full launch command: " + launch_command << std::endl;
 		std::cout << "Starting the game..." << std::endl;
 		utils->startup(java_path.c_str(), const_cast<char*>(launch_command.c_str()));

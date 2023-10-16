@@ -1,0 +1,164 @@
+[10:43:14] [main/INFO]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
+[10:43:14] [main/INFO]: Using primary tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
+[10:43:14] [main/INFO]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLTweaker
+[10:43:14] [main/INFO]: Forge Mod Loader version 14.23.5.2859 for Minecraft 1.12.2 loading
+[10:43:14] [main/INFO]: Java is Java HotSpot(TM) 64-Bit Server VM, version 1.8.0_361, running on Windows 10:amd64:10.0, installed at C:\Users\Admin.DESKTOP-2TBJCNL\AppData\Roaming\NLauncher\test\java\jre
+[10:43:14] [main/INFO]: Searching C:\Users\Admin.DESKTOP-2TBJCNL\AppData\Roaming\NLauncher\test\mods for mods
+[10:43:14] [main/INFO]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[10:43:14] [main/INFO]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[10:43:14] [main/INFO]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[10:43:14] [main/INFO]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[10:43:14] [main/INFO]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[10:43:15] [main/INFO]: Found valid fingerprint for Minecraft Forge. Certificate fingerprint e3c3d50c7c986df74c645c0ac54639741c90a557
+[10:43:15] [main/INFO]: Found valid fingerprint for Minecraft. Certificate fingerprint cd99959656f753dc28d863b46769f7f8fbaefcfc
+[10:43:15] [main/INFO]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[10:43:15] [main/INFO]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[10:43:15] [main/INFO]: Loading tweak class name net.minecraftforge.fml.common.launcher.TerminalTweaker
+[10:43:15] [main/INFO]: Calling tweak class net.minecraftforge.fml.common.launcher.TerminalTweaker
+[10:43:15] [main/INFO]: Launching wrapped minecraft {net.minecraft.client.main.Main}
+[10:43:16] [Client thread/INFO]: SkinFix by TaoGunner
+[10:43:16] [Client thread/INFO]: Setting user: test
+[10:43:18] [Client thread/WARN]: Skipping bad option: lastServer:
+[10:43:18] [Client thread/INFO]: LWJGL Version: 2.9.4
+[10:43:19] [Client thread/INFO]: -- System Details --
+Details:
+	Minecraft Version: 1.12.2
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 1.8.0_361, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 624967744 bytes (596 MB) / 1073741824 bytes (1024 MB) up to 4294967296 bytes (4096 MB)
+	JVM Flags: 7 total; -Xmx4096M -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=32M
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: 
+	Loaded coremods (and transformers): 
+	GL info: ' Vendor: 'NVIDIA Corporation' Version: '4.6.0 NVIDIA 531.41' Renderer: 'NVIDIA GeForce RTX 3060 Laptop GPU/PCIe/SSE2'
+[10:43:19] [Client thread/INFO]: MinecraftForge v14.23.5.2859 Initialized
+[10:43:19] [Client thread/INFO]: Starts to replace vanilla recipe ingredients with ore ingredients.
+[10:43:19] [Client thread/INFO]: Invalid recipe found with multiple oredict ingredients in the same ingredient...
+[10:43:19] [Client thread/INFO]: Replaced 1227 ore ingredients
+[10:43:19] [Client thread/INFO]: Searching C:\Users\Admin.DESKTOP-2TBJCNL\AppData\Roaming\NLauncher\test\mods for mods
+[10:43:20] [Client thread/INFO]: Forge Mod Loader has identified 5 mods to load
+[10:43:20] [Client thread/INFO]: Attempting connection with missing mods [minecraft, mcp, FML, forge, ic2] at CLIENT
+[10:43:20] [Client thread/INFO]: Attempting connection with missing mods [minecraft, mcp, FML, forge, ic2] at SERVER
+[10:43:21] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:IndustrialCraft 2
+[10:43:21] [Client thread/INFO]: Processing ObjectHolder annotations
+[10:43:21] [Client thread/INFO]: Found 1168 ObjectHolder annotations
+[10:43:21] [Client thread/INFO]: Identifying ItemStackHolder annotations
+[10:43:21] [Client thread/INFO]: Found 0 ItemStackHolder annotations
+[10:43:21] [Client thread/INFO]: Configured a dormant chunk cache size of 0
+[10:43:21] [Forge Version Check/INFO]: [forge] Starting version check at http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json
+[10:43:21] [Thread-3/INFO]: Using sync timing. 200 frames of Display.update took 129875400 nanos
+[10:43:23] [Forge Version Check/INFO]: [forge] Found status: UP_TO_DATE Target: null
+[10:43:26] [Client thread/INFO]: Successfully loaded 354 out of 354 recipes for shaped recipes
+[10:43:26] [Client thread/INFO]: Successfully loaded 79 out of 79 recipes for shapeless recipes
+[10:43:26] [Client thread/INFO]: Successfully loaded 41 out of 41 recipes for solid uu recipes
+[10:43:26] [Client thread/INFO]: Successfully loaded 27 out of 27 recipes for furnace recipes
+[10:43:26] [Client thread/INFO]: Successfully loaded 5 out of 5 recipes for blast furnace recipes
+[10:43:26] [Client thread/INFO]: Successfully loaded 14 out of 14 recipes for block cutter recipes
+[10:43:26] [Client thread/INFO]: Successfully loaded 51 out of 51 recipes for compressor recipes
+[10:43:26] [Client thread/INFO]: Successfully loaded 14 out of 14 recipes for extractor recipes
+[10:43:26] [Client thread/INFO]: Successfully loaded 89 out of 89 recipes for macerator recipes
+[10:43:26] [Client thread/INFO]: Successfully loaded 5 out of 5 recipes for metal former cutting recipes
+[10:43:26] [Client thread/INFO]: Successfully loaded 10 out of 10 recipes for metal former extruding recipes
+[10:43:26] [Client thread/INFO]: Successfully loaded 14 out of 14 recipes for metal former rolling recipes
+[10:43:26] [Client thread/INFO]: Successfully loaded 8 out of 8 recipes for ore washing recipes
+[10:43:26] [Client thread/INFO]: Successfully loaded 26 out of 26 recipes for thermal centrifuge recipes
+[10:43:26] [Client thread/WARN]: The item tritium_fuel_rod is not initialized.
+[10:43:26] [Client thread/WARN]: The item plasma_launcher is not initialized.
+[10:43:26] [Client thread/WARN]: The item item_pipe is not initialized.
+[10:43:26] [Client thread/WARN]: The item extractor_cover is not initialized.
+[10:43:26] [Client thread/WARN]: The item ingot2 is not initialized.
+[10:43:26] [Client thread/WARN]: The item test_pick is not initialized.
+[10:43:26] [Client thread/WARN]: The fluid deuterium is not initialized.
+[10:43:26] [Client thread/WARN]: The fluid molten_brass is not initialized.
+[10:43:26] [Client thread/WARN]: The fluid molten_bronze is not initialized.
+[10:43:26] [Client thread/WARN]: The fluid molten_copper is not initialized.
+[10:43:26] [Client thread/WARN]: The fluid molten_gold is not initialized.
+[10:43:26] [Client thread/WARN]: The fluid molten_iron is not initialized.
+[10:43:26] [Client thread/WARN]: The fluid molten_lead is not initialized.
+[10:43:26] [Client thread/WARN]: The fluid molten_silver is not initialized.
+[10:43:26] [Client thread/WARN]: The fluid molten_steel is not initialized.
+[10:43:26] [Client thread/WARN]: The fluid molten_tin is not initialized.
+[10:43:26] [Client thread/WARN]: The fluid molten_zinc is not initialized.
+[10:43:26] [Client thread/INFO]: Applying holder lookups
+[10:43:26] [Client thread/INFO]: Holder lookups applied
+[10:43:26] [Client thread/INFO]: Applying holder lookups
+[10:43:26] [Client thread/INFO]: Holder lookups applied
+[10:43:26] [Client thread/INFO]: Applying holder lookups
+[10:43:26] [Client thread/INFO]: Holder lookups applied
+[10:43:26] [Client thread/INFO]: Applying holder lookups
+[10:43:26] [Client thread/INFO]: Holder lookups applied
+[10:43:26] [Client thread/INFO]: Injecting itemstacks
+[10:43:26] [Client thread/INFO]: Itemstack injection complete
+[10:43:26] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[10:43:27] [Thread-5/INFO]: Initializing LWJGL OpenAL
+[10:43:27] [Thread-5/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[10:43:27] [Thread-5/INFO]: OpenAL initialized.
+[10:43:27] [Sound Library Loader/INFO]: Sound engine started
+[10:43:28] [Client thread/INFO]: Max texture size: 16384
+[10:43:29] [Client thread/INFO]: Created: 1024x1024 textures-atlas
+[10:43:30] [Client thread/INFO]: Applying holder lookups
+[10:43:30] [Client thread/INFO]: Holder lookups applied
+[10:43:30] [Client thread/INFO]: Injecting itemstacks
+[10:43:30] [Client thread/INFO]: Itemstack injection complete
+[10:43:30] [Client thread/INFO]: Loading predefined UU world scan values, run /ic2 uu-world-scan <small|medium|large> to calibrate them for your world.
+[10:43:30] [Client thread/INFO]: ic2 version 2.8.222-ex112 loaded.
+[10:43:30] [Client thread/INFO]: Forge Mod Loader has successfully loaded 5 mods
+[10:43:30] [Client thread/WARN]: Skipping bad option: lastServer:
+[10:43:30] [Client thread/INFO]: Narrator library for x64 successfully loaded
+[10:43:31] [Realms Notification Availability checker #1/INFO]: Could not authorize you against Realms server: Invalid session id
+[10:43:35] [Client thread/INFO]: Connecting to 192.168.100.117, 25565
+[10:43:35] [Netty Client IO #1/INFO]: Server protocol version 2
+[10:43:35] [Client thread/INFO]: Injecting existing registry data into this client instance
+[10:43:35] [Client thread/INFO]: Applying holder lookups
+[10:43:35] [Client thread/INFO]: Holder lookups applied
+[10:43:35] [Netty Client IO #1/INFO]: [Netty Client IO #1] Client side modded connection established
+[10:43:36] [Client thread/INFO]: SkinFix by TaoGunner
+[10:43:36] [pool-3-thread-1/ERROR]: Could not decode textures payload
+com.google.gson.JsonSyntaxException: java.lang.NumberFormatException: Expected a long but was 1697442215.6438477 at line 1 column 33 path $.timestamp
+	at com.google.gson.internal.bind.TypeAdapters$11.read(TypeAdapters.java:323) ~[TypeAdapters$11.class:?]
+	at com.google.gson.internal.bind.TypeAdapters$11.read(TypeAdapters.java:313) ~[TypeAdapters$11.class:?]
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$1.read(ReflectiveTypeAdapterFactory.java:129) ~[ReflectiveTypeAdapterFactory$1.class:?]
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:220) ~[ReflectiveTypeAdapterFactory$Adapter.class:?]
+	at com.google.gson.Gson.fromJson(Gson.java:887) ~[Gson.class:?]
+	at com.google.gson.Gson.fromJson(Gson.java:852) ~[Gson.class:?]
+	at com.google.gson.Gson.fromJson(Gson.java:801) ~[Gson.class:?]
+	at com.google.gson.Gson.fromJson(Gson.java:773) ~[Gson.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.getTextures(YggdrasilMinecraftSessionService.java:144) [YggdrasilMinecraftSessionService.class:?]
+	at net.minecraft.client.resources.SkinManager$3.run(SourceFile:104) [cex$3.class:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [?:1.8.0_361]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [?:1.8.0_361]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_361]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_361]
+	at java.lang.Thread.run(Thread.java:750) [?:1.8.0_361]
+Caused by: java.lang.NumberFormatException: Expected a long but was 1697442215.6438477 at line 1 column 33 path $.timestamp
+	at com.google.gson.stream.JsonReader.nextLong(JsonReader.java:967) ~[JsonReader.class:?]
+	at com.google.gson.internal.bind.TypeAdapters$11.read(TypeAdapters.java:321) ~[TypeAdapters$11.class:?]
+	... 14 more
+[10:43:36] [pool-3-thread-1/ERROR]: Could not decode textures payload
+com.google.gson.JsonSyntaxException: java.lang.NumberFormatException: Expected a long but was 1697442217.0004942 at line 1 column 33 path $.timestamp
+	at com.google.gson.internal.bind.TypeAdapters$11.read(TypeAdapters.java:323) ~[TypeAdapters$11.class:?]
+	at com.google.gson.internal.bind.TypeAdapters$11.read(TypeAdapters.java:313) ~[TypeAdapters$11.class:?]
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$1.read(ReflectiveTypeAdapterFactory.java:129) ~[ReflectiveTypeAdapterFactory$1.class:?]
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:220) ~[ReflectiveTypeAdapterFactory$Adapter.class:?]
+	at com.google.gson.Gson.fromJson(Gson.java:887) ~[Gson.class:?]
+	at com.google.gson.Gson.fromJson(Gson.java:852) ~[Gson.class:?]
+	at com.google.gson.Gson.fromJson(Gson.java:801) ~[Gson.class:?]
+	at com.google.gson.Gson.fromJson(Gson.java:773) ~[Gson.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.getTextures(YggdrasilMinecraftSessionService.java:144) [YggdrasilMinecraftSessionService.class:?]
+	at net.minecraft.client.resources.SkinManager$3.run(SourceFile:111) [cex$3.class:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [?:1.8.0_361]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [?:1.8.0_361]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_361]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_361]
+	at java.lang.Thread.run(Thread.java:750) [?:1.8.0_361]
+Caused by: java.lang.NumberFormatException: Expected a long but was 1697442217.0004942 at line 1 column 33 path $.timestamp
+	at com.google.gson.stream.JsonReader.nextLong(JsonReader.java:967) ~[JsonReader.class:?]
+	at com.google.gson.internal.bind.TypeAdapters$11.read(TypeAdapters.java:321) ~[TypeAdapters$11.class:?]
+	... 14 more
+[10:43:36] [Client thread/INFO]: Loaded 97 advancements
+[10:43:40] [Client thread/INFO]: Applying holder lookups
+[10:43:40] [Client thread/INFO]: Holder lookups applied
+[10:49:23] [Client thread/INFO]: Stopping!
+[10:49:23] [Client thread/INFO]: SoundSystem shutting down...
+[10:49:23] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com

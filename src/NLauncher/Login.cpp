@@ -4,7 +4,7 @@ Login::Login(QApplication* a, QMainWindow* w) {
 	nickname = "";
 	password = "";
 	answer = "";
-	IP = "192.168.3.107:5000";
+	IP = "192.168.100.117:5000";
 	manager = new QNetworkAccessManager(a);
 	nick_l = new QLabel("Nickname", w);
 	pass_l = new QLabel("Password", w);
