@@ -166,20 +166,37 @@ def register(nickname, password):
 @app.route('/auth/join', methods=['POST'])
 def auth_join():
     data = request.get_json()
-    cur.execute(f"UPDATE users SET serverId = '{data['serverId']}' WHERE uuid == '{data['selectedProfile']}';")
-    conn.commit()
+    uuid = data['selectedProfile'][:8] + "-" + data['selectedProfile'][8:]
+    uuid = uuid[:13] + "-" + uuid[13:]
+    uuid = uuid[:18] + "-" + uuid[18:]
+    uuid = uuid[:23] + "-" + uuid[23:]
+    cur.execute(f"SELECT uuid FROM users WHERE uuid == '{uuid}' AND accessToken == '{data['accessToken']}';")
+    sqldata = cur.fetchall()
+    if len(sqldata) > 0:
+        cur.execute(f"UPDATE users SET serverId = '{data['serverId']}' WHERE uuid == '{uuid}';")
+        conn.commit()
+        return '', 204
+    else:
+        return json.dumps({"error": 'ForbiddenOperationException', "errorMessage": 'Invalid username or password', "cause": ''})
 
 @app.route('/auth/hasJoined', methods=['GET'])
 def auth_hasjoined():
     serverId = request.args.get('serverId')
     username = request.args.get('username')
-    cur.execute(f"SELECT uuid FROM users WHERE username == '{username}';") # AND serverId == '{serverId}'
+    cur.execute(f"SELECT uuid FROM users WHERE username == '{username}' and serverId == '{serverId}';")
     data = cur.fetchall()
-    return json.dumps(getProfile(data[0][0], username))
+    if len(data) > 0:
+        return json.dumps(getProfile(data[0][0], username))
+    else:
+        return "400"
 
 @app.route('/auth/profile', methods=['GET'])
 def auth_profile():
     uuid = request.args.get('uuid')
+    uuid = uuid[:8] + "-" + uuid[8:]
+    uuid = uuid[:13] + "-" + uuid[13:]
+    uuid = uuid[:18] + "-" + uuid[18:]
+    uuid = uuid[:23] + "-" + uuid[23:]
     cur.execute(f"SELECT username FROM users WHERE uuid = '{uuid}';")
     data = cur.fetchall()
     return json.dumps(getProfile(uuid, data[0][0]))
