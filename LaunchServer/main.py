@@ -1,4 +1,6 @@
 from flask import Flask, request, send_file
+from flask_cors import CORS
+import requests
 import json
 import sqlite3
 import uuid
@@ -8,6 +10,8 @@ import random
 import shutil
 import time
 import base64
+
+server_url = "http://192.168.0.0/skin/"
 
 conn = sqlite3.connect("data.db", check_same_thread=False)
 cur = conn.cursor()
@@ -40,6 +44,25 @@ cur.execute("""CREATE TABLE IF NOT EXISTS filewl(
 # conn.commit()
 
 app = Flask(__name__)
+cors = CORS(app)
+
+def minecraft_sha1_hash_digest(sha1_hash):
+    # Minecraft first parses the sha1 bytes as a signed number and then
+    # spits outs its hex representation
+    number_representation = _number_from_bytes(sha1_hash.digest(), signed=True)
+    return format(number_representation, 'x')
+
+def _number_from_bytes(b, signed=False):
+    try:
+        return int.from_bytes(b, byteorder='big', signed=signed)
+    except AttributeError:  # pragma: no cover
+        # py-2 compatibility
+        if len(b) == 0:
+            b = b'\x00'
+        num = int(str(b).encode('hex'), 16)
+        if signed and (ord(b[0]) & 0x80):
+            num -= 2 ** (len(b) * 8)
+        return num
 
 def getdir(dir_path):
     file_list = []
@@ -54,10 +77,10 @@ def getdir(dir_path):
 def getSkinURL(username, type):
     texture = "textures/" + type + "/" + username.lower() + ".jpg"
     if (os.path.exists(texture)):
-        skin = "skins/" + str(hashlib.md5(texture).hexdigest()) + '.png'
+        skin = "skins/" + str(minecraft_sha1_hash_digest(hashlib.sha1(texture.encode("utf-8")))) + '.png'
         if (os.path.exists(skin)):
             shutil.copy(texture, skin)
-            return "http://192.168.100.117/file/path=skins&" + str(hashlib.md5(texture).hexdigest()) + ".png"
+            return {"url": server_url + str(minecraft_sha1_hash_digest(hashlib.sha1(texture.encode("utf-8"))))}
     else:
         return False
 
@@ -68,7 +91,7 @@ def getProfile(uuid, username):
         textures['SKIN'] = getSkinURL(username, 'skin')
     if (getSkinURL(username, 'cape')):
         textures['CAPE'] = getSkinURL(username, 'cape')
-    property = {'timestamp': time.time(), 'profileId': uuid, 'profileName': username, 'textures': textures}
+    property = {'timestamp': round(time.time()), 'profileId': uuid, 'profileName': username, 'textures': textures}
     profile = {'id': uuid, 'name': username, 'properties': [{'name': 'textures', 'value': str(base64.b64encode(json.dumps(property).encode('utf-8')).decode('utf-8')), 'signature': ''}]}
     return profile
 
@@ -107,6 +130,7 @@ def addserver():
     cur.execute(
         f"INSERT INTO servers(id, name, description, img, path, version, modloader) VALUES({id}, '{data['name']}', '{data['description']}', '{data['img']}', '{data['path']}', '{data['version']}', '{data['modloader']}');")
     conn.commit()
+
     return "200"
 
 @app.route('/serverfiles/id=<int:id>', methods=['GET'])
@@ -134,6 +158,8 @@ def file(path):
 
 @app.route('/login/nickname=<string:nickname>&password=<string:password>', methods=['GET'])
 def login(nickname, password):
+    if ";" in nickname or ";" in password:
+        return "400"
     cur.execute("SELECT username FROM users;")
     names = cur.fetchall()
     for name in names:
@@ -152,6 +178,8 @@ def login(nickname, password):
 
 @app.route('/register/nickname=<string:nickname>&password=<string:password>', methods=['GET'])
 def register(nickname, password):
+    if ";" in nickname or ";" in password:
+        return "400"
     cur.execute("SELECT username FROM users;")
     names = cur.fetchall()
     for name in names:
@@ -163,6 +191,36 @@ def register(nickname, password):
         conn.commit()
         return "200"
 
+@app.route('/skin/<string:hash>', methods=['GET'])
+def skin(hash):
+    return send_file("skins/"+hash+".png")
+
+@app.route('/setskin', methods=['POST'])
+def setskin():
+    data = request.get_json()
+    r = requests.get(data["url"])
+    path = "textures/skin/" + data["nickname"].lower() + ".jpg"
+    f = open(path, "wb")
+    f.write(r.content)
+    f.close()
+    f = open("skins/" + str(minecraft_sha1_hash_digest(hashlib.sha1(path.encode("utf-8")))) + '.png', "wb")
+    f.write(r.content)
+    f.close()
+    return "200"
+
+@app.route('/setcape', methods=['POST'])
+def setcape():
+    data = request.get_json()
+    r = requests.get(data["url"])
+    path = "textures/cape/" + data["nickname"].lower() + ".jpg"
+    f = open(path, "wb")
+    f.write(r.content)
+    f.close()
+    f = open("skins/" + str(minecraft_sha1_hash_digest(hashlib.sha1(path.encode("utf-8")))) + '.png', "wb")
+    f.write(r.content)
+    f.close()
+    return "200"
+
 @app.route('/auth/join', methods=['POST'])
 def auth_join():
     data = request.get_json()
@@ -170,7 +228,7 @@ def auth_join():
     uuid = uuid[:13] + "-" + uuid[13:]
     uuid = uuid[:18] + "-" + uuid[18:]
     uuid = uuid[:23] + "-" + uuid[23:]
-    cur.execute(f"SELECT uuid FROM users WHERE uuid == '{uuid}' AND accessToken == '{data['accessToken']}';")
+    cur.execute(f"SELECT username FROM users WHERE uuid == '{uuid}' AND accessToken == '{data['accessToken']}';")
     sqldata = cur.fetchall()
     if len(sqldata) > 0:
         cur.execute(f"UPDATE users SET serverId = '{data['serverId']}' WHERE uuid == '{uuid}';")
@@ -197,8 +255,11 @@ def auth_profile():
     uuid = uuid[:13] + "-" + uuid[13:]
     uuid = uuid[:18] + "-" + uuid[18:]
     uuid = uuid[:23] + "-" + uuid[23:]
-    cur.execute(f"SELECT username FROM users WHERE uuid = '{uuid}';")
+    cur.execute(f"SELECT username FROM users WHERE uuid == '{uuid}';")
     data = cur.fetchall()
-    return json.dumps(getProfile(uuid, data[0][0]))
+    if len(data) > 0:
+        return json.dumps(getProfile(uuid, data[0][0]))
+    else:
+        return "400"
 
-app.run(host="192.168.100.117", port=5000)
+app.run(host="0.0.0.0", port=5000)
