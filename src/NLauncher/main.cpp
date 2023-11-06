@@ -16,6 +16,8 @@ int main(int argc, char *argv[])
     login->pass_e->setGeometry(310, 190, 100, 20);
     login->pass_e->show();
     login->pass_e->setEchoMode(QLineEdit::Password);
+    login->session_b->setGeometry(310, 250, 100, 50);
+    login->session_b->show();
     login->login_b->setGeometry(310, 220, 100, 30);
     login->login_b->show();
     w->setFixedSize(720, 405);
@@ -23,6 +25,7 @@ int main(int argc, char *argv[])
     QObject::connect(login->nick_e, SIGNAL(textEdited(const QString&)), login, SLOT(setNickname(const QString&)));
     QObject::connect(login->pass_e, SIGNAL(textEdited(const QString&)), login, SLOT(setPassword(const QString&)));
     QObject::connect(login->login_b, SIGNAL(clicked()), login, SLOT(loginRequest()));
+    QObject::connect(login->session_b, SIGNAL(clicked()), login, SLOT(setSession()));
     QObject::connect(login, SIGNAL(loginSuccess()), maingui, SLOT(initGUI()));
     QObject::connect(maingui->memory_s, SIGNAL(valueChanged(int)), maingui, SLOT(setMemory(int)));
     QObject::connect(maingui->debug_b, SIGNAL(clicked()), maingui, SLOT(debugMode()));

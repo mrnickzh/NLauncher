@@ -4,7 +4,7 @@ MainGUI::MainGUI(QApplication* a, QMainWindow* w, Login* lc) {
 	lclass = lc;
 	utils = new Utils;
 	launcher_name = "NLauncher";
-	IP = "192.168.100.117:5000";
+	IP = "http://192.168.100.117:5000";
 	std::string homefolder = getenv("USERPROFILE");
 	launcher_path = homefolder + "\\AppData\\Roaming\\" + launcher_name;
 	if (!fs::is_directory(launcher_path) || !fs::exists(launcher_path)) {
@@ -47,7 +47,20 @@ MainGUI::MainGUI(QApplication* a, QMainWindow* w, Login* lc) {
 	description_l = new QLabel(w);
 	play_b = new QPushButton("Play", w);
 	play_w = new QWidget;
+	error_w = new QWidget;
 	play_l = new QLabel(play_w);
+	error_l = new QLabel(error_w);
+	memory_s->setTickPosition(QSlider::TicksAbove);
+	if (std::filesystem::exists("session.txt")) {
+		std::ifstream ssn("session.txt");
+		std::string tmp;
+		std::getline(ssn, tmp);
+		std::getline(ssn, tmp);
+		std::getline(ssn, tmp);
+		memory = std::stoi(tmp);
+		memory_s->setValue(memory / 1024);
+		ssn.close();
+	}
 	label0->hide();
 	label1->hide();
 	label2->hide();
@@ -85,9 +98,9 @@ void MainGUI::initGUI() {
 	memory_l->setGeometry(520, 80, 80, 20);
 	memory_l->show();
 	memory_l->raise();
-	memory_s->setRange(0, 16);
-	memory_s->setTickInterval(1);
-	memory_s->setValue(memory/2048);
+	memory_s->setRange(0, 32);
+	memory_s->setTickInterval(2);
+	memory_s->setValue(memory / 1024);
 	memory_s->setGeometry(390, 120, 320, 20);
 	memory_s->show();
 	memory_s->raise();
@@ -178,7 +191,22 @@ void MainGUI::initGUI() {
 };
 
 void MainGUI::setMemory(int val) {
-	memory = val * 2048;
+	memory = val * 1024;
+	std::string lgn;
+	std::string pwd;
+	if (std::filesystem::exists("session.txt")) {
+		std::ifstream ssn("session.txt");
+		std::getline(ssn, lgn);
+		std::getline(ssn, pwd);
+		ssn.close();
+	}
+	if (std::filesystem::exists("session.txt")) {
+		std::ofstream ssn("session.txt");
+		ssn << lgn << std::endl;
+		ssn << pwd << std::endl;
+		ssn << memory << std::endl;
+		ssn.close();
+	};
 };
 
 void MainGUI::debugMode() {
@@ -188,7 +216,7 @@ void MainGUI::debugMode() {
 };
 
 void MainGUI::changeServer() {
-	std::string strurl = "http://" + IP + "/server/id=" + std::to_string(server_id);
+	std::string strurl = IP + "/server/id=" + std::to_string(server_id);
 	QString url = QString::fromUtf8(strurl.c_str());
 	connect(request_manager, &QNetworkAccessManager::finished, this, &MainGUI::changeServerFinished);
 	request_manager->get(QNetworkRequest(QUrl(url)));
@@ -208,22 +236,20 @@ void MainGUI::changeServerFinished(QNetworkReply* reply) {
 	std::string server_image = jsondata["img"];
 	server_path = jsondata["path"];
 	server_version = jsondata["version"];
-	if (jsondata["modloader"] == "fabric")
-		mlclass = "-DFabricMcEmu=net.minecraft.client.main.Main net.fabricmc.loader.impl.launch.knot.KnotClient";
-	else if (jsondata["modloader"] == "forge")
-		mlclass = "net.minecraftforge.fml.common.launcher.FMLTweaker";
-	name_l->setGeometry(140, 240, 100, 10);
+	mlclass = jsondata["modloader"];
+	name_l->setGeometry(120, 240, 120, 20);
 	name_l->setText(QString::fromUtf8(server_name));
 	name_l->setAlignment(Qt::AlignCenter);
 	name_l->show();
 	name_l->raise();
-	description_l->setGeometry(140, 255, 100, 40);
+	description_l->setGeometry(120, 255, 120, 60);
+	description_l->setWordWrap(true);
 	description_l->setText(QString::fromUtf8(server_description));
 	description_l->setAlignment(Qt::AlignCenter);
 	description_l->show();
 	description_l->raise();
-	QString img_link = QString::fromUtf8("http://" + IP + "/file/path=sprevs&" + server_image);
-	dl->setTarget(img_link, QString::fromUtf8(std::string(launcher_path+"\\sprev.jpg")));
+	QString img_link = QString::fromUtf8(IP + "/file/path=sprevs&" + server_image);
+	dl->setTarget(img_link, QString::fromUtf8(std::string(launcher_path + "\\sprev.jpg")));
 	dl->download();
 	connect(dl, SIGNAL(done()), this, SLOT(drawImage()));
 	prev_server_id = server_id;
@@ -291,7 +317,7 @@ void MainGUI::downloadGameFiles(QNetworkReply* reply) {
 				cpath += "\\" + folders[j];
 			}
 			std::cout << "downloading " + name << std::endl;
-			QString file_link = QString::fromUtf8("http://" + IP + "/file/path=" + link + "&" + name);
+			QString file_link = QString::fromUtf8(IP + "/file/path=" + link + "&" + name);
 			dl->setTarget(file_link, QString::fromUtf8(std::string(launcher_path + "\\" + path + "\\" + name)));
 			total_files += 1;
 		}
@@ -303,7 +329,7 @@ void MainGUI::downloadGameFiles(QNetworkReply* reply) {
 			hashfile.close();
 			if (md5(buffer.str()) != hash && !std::any_of(file_whitelist.begin(), file_whitelist.end(), [&fpath](const auto& s) { return fpath.find(s) != std::string::npos; })) {
 				std::cout << "downloading " + name << std::endl;
-				QString file_link = QString::fromUtf8("http://" + IP + "/file/path=" + link + "&" + name);
+				QString file_link = QString::fromUtf8(IP + "/file/path=" + link + "&" + name);
 				dl->setTarget(file_link, QString::fromUtf8(std::string(launcher_path + "\\" + path + "\\" + name)));
 				total_files += 1;
 			}
@@ -343,7 +369,7 @@ void MainGUI::clearDir() {
 };
 
 void MainGUI::requestFileWhitelist() {
-	std::string strurl = "http://" + IP + "/filewl/id=" + std::to_string(server_id);
+	std::string strurl = IP + "/filewl/id=" + std::to_string(server_id);
 	QString url = QString::fromUtf8(strurl.c_str());
 	connect(request_manager, &QNetworkAccessManager::finished, this, &MainGUI::getFileWhitelist);
 	request_manager->get(QNetworkRequest(QUrl(url)));
@@ -374,6 +400,14 @@ void MainGUI::requestAssetIndex() {
 void MainGUI::getVersionInfo(QNetworkReply* reply) {
 	disconnect(request_manager, &QNetworkAccessManager::finished, this, &MainGUI::getVersionInfo);
 	QByteArray answer = reply->readAll();
+	if (!json::accept(answer.data())) {
+		error_w->setFixedSize(200, 50);
+		error_w->show();
+		error_l->setGeometry(20, 20, 160, 20);
+		error_l->setText("Error, press 'Play' again");
+		error_l->show();
+		return;
+	};
 	json jsondata;
 	jsondata = json::parse(std::string(answer.data()));
 	for (int i = 0; i < jsondata["versions"].size(); i++) {
@@ -391,10 +425,18 @@ void MainGUI::getVersionInfo(QNetworkReply* reply) {
 void MainGUI::getAssetIndex(QNetworkReply* reply) {
 	disconnect(request_manager, &QNetworkAccessManager::finished, this, &MainGUI::getAssetIndex);
 	QByteArray answer = reply->readAll();
+	if (!json::accept(answer.data())) {
+		error_w->setFixedSize(200, 50);
+		error_w->show();
+		error_l->setGeometry(20, 20, 160, 20);
+		error_l->setText("Error, press 'Play' again");
+		error_l->show();
+		return;
+	};
 	json jsondata;
 	jsondata = json::parse(std::string(answer.data()));
 	asset_index = jsondata["assetIndex"]["id"];
-	std::string strurl = "http://" + IP + "/serverfiles/id=" + std::to_string(server_id);
+	std::string strurl = IP + "/serverfiles/id=" + std::to_string(server_id);
 	QString url = QString::fromUtf8(strurl.c_str());
 	connect(request_manager, &QNetworkAccessManager::finished, this, &MainGUI::downloadGameFiles);
 	request_manager->get(QNetworkRequest(QUrl(url)));
@@ -420,3 +462,4 @@ void MainGUI::gameDownloadFinished() {
 		utils->startup(java_path.c_str(), const_cast<char*>(launch_command.c_str()));
 	}
 };
+

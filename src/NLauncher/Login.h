@@ -13,6 +13,8 @@
 #include <qlabel.h>
 #include <qmainwindow.h>
 #include <qmessagebox.h>
+#include <fstream>
+#include <qradiobutton.h>
 
 #include "md5.h"
 
@@ -32,19 +34,23 @@ public:
 	std::string uuid;
 	std::string access_token;
 	std::string IP;
+	int memory;
 	QLabel* nick_l;
 	QLabel* pass_l;
 	QLineEdit* nick_e;
 	QLineEdit* pass_e;
 	QPushButton* login_b;
+	QRadioButton* session_b;
 	Login(QApplication*, QMainWindow*);
 	void replyFinished(QNetworkReply*);
 	std::string getReply();
+	bool session;
 signals:
 	void loginSuccess();
 public slots:
 	void setNickname(const QString&);
 	void setPassword(const QString&);
+	void setSession();
 	void loginRequest();
 };
 

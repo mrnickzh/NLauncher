@@ -32,7 +32,7 @@ using json = nlohmann::json;
 namespace fs = std::filesystem;
 
 class MainGUI : public QObject {
-	
+
 	Q_OBJECT
 
 private:
@@ -67,7 +67,9 @@ private:
 	QLabel* name_l;
 	QLabel* description_l;
 	QWidget* play_w;
+	QWidget* error_w;
 	QLabel* play_l;
+	QLabel* error_l;
 	int memory;
 	int server_id;
 	int prev_server_id;

@@ -24,8 +24,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Login_t {
-    const uint offsetsAndSize[12];
-    char stringdata0[57];
+    const uint offsetsAndSize[14];
+    char stringdata0[68];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_Login_t, stringdata0) + ofs), len 
@@ -36,11 +36,12 @@ QT_MOC_LITERAL(6, 12), // "loginSuccess"
 QT_MOC_LITERAL(19, 0), // ""
 QT_MOC_LITERAL(20, 11), // "setNickname"
 QT_MOC_LITERAL(32, 11), // "setPassword"
-QT_MOC_LITERAL(44, 12) // "loginRequest"
+QT_MOC_LITERAL(44, 10), // "setSession"
+QT_MOC_LITERAL(55, 12) // "loginRequest"
 
     },
     "Login\0loginSuccess\0\0setNickname\0"
-    "setPassword\0loginRequest"
+    "setPassword\0setSession\0loginRequest"
 };
 #undef QT_MOC_LITERAL
 
@@ -50,7 +51,7 @@ static const uint qt_meta_data_Login[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -58,12 +59,13 @@ static const uint qt_meta_data_Login[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   38,    2, 0x06,    1 /* Public */,
+       1,    0,   44,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       3,    1,   39,    2, 0x0a,    2 /* Public */,
-       4,    1,   42,    2, 0x0a,    4 /* Public */,
-       5,    0,   45,    2, 0x0a,    6 /* Public */,
+       3,    1,   45,    2, 0x0a,    2 /* Public */,
+       4,    1,   48,    2, 0x0a,    4 /* Public */,
+       5,    0,   51,    2, 0x0a,    6 /* Public */,
+       6,    0,   52,    2, 0x0a,    7 /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -71,6 +73,7 @@ static const uint qt_meta_data_Login[] = {
  // slots: parameters
     QMetaType::Void, QMetaType::QString,    2,
     QMetaType::Void, QMetaType::QString,    2,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -85,7 +88,8 @@ void Login::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         case 0: _t->loginSuccess(); break;
         case 1: _t->setNickname((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 2: _t->setPassword((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 3: _t->loginRequest(); break;
+        case 3: _t->setSession(); break;
+        case 4: _t->loginRequest(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -108,7 +112,7 @@ const QMetaObject Login::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_Login_t
 , QtPrivate::TypeAndForceComplete<Login, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
 >,
@@ -135,13 +139,13 @@ int Login::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }
